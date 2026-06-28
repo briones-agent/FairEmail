@@ -171,7 +171,7 @@
     <string name="title_setup">Iestatījumi</string>
     <string name="title_setup_help">Palīdzība</string>
     <string name="title_setup_quick">Ātrā iestatīšana</string>
-    <string name="title_setup_intro">Iestatiet kontu tikai trīs soļos, un tad varēsiet sūtīt un saņemt e-pastus</string>
+    <string name="title_setup_intro">Konta iestatīšanai ir tikai trīs soļi, un tad var sūtīt un saņemt e-pastu</string>
     <string name="title_setup_simple">Nav nepieciešams mainīt citus iestatījumus</string>
     <string name="title_setup_issue">FairEmail tika izstrādāta, lai palīdzētu aizsargāt lietotāju konfidencialitāti, un tā burtiski atspoguļo tūkstošiem darba stundu tā izstrādē. Ja ir kādi sarežģījumi, lūgums vispirms sazināties ar mani, pirms atstājiet sliktu atsauksmi. Būšu priecīgs palīdzēt.</string>
     <string name="title_setup_analytics">FairEmail nerāda reklāmas un neizseko vai neapkopo lietotāju uzvedību.</string>
@@ -481,8 +481,8 @@
     <string name="title_advanced_swipe_actions">Iestatīt vilkšanas žestus</string>
     <string name="title_advanced_swipe_actions_hint">Tas iestatīs pa kreisi un labi vilkšanas žestu darbības visiem IMAP kontiem</string>
     <string name="title_advanced_swipe_sensitivity">Pa kreisi/pa labi vilkšanas žesta jutīgums</string>
-    <string name="title_identity_name">Jūsu vārds</string>
-    <string name="title_identity_email">Jūsu e-pasta adrese</string>
+    <string name="title_identity_name">Tavs vārds</string>
+    <string name="title_identity_email">Tava e-pasta adrese</string>
     <string name="title_identity_receive_first_hint">Šīs iespējas ieslēgšana ir nepieciešama reti, vēl jo vairāk - palielināsies datu lietojums.</string>
     <string name="title_identity_sensitivity">Noklusējuma jūtīgums</string>
     <string name="title_identity_octetmime">Ļaut 8BITMIME</string>
@@ -677,7 +677,7 @@
     <string name="title_size">Izmērs:</string>
     <string name="title_language">Valoda:</string>
     <string name="title_subject">Temats:</string>
-    <string name="title_body_hint">Jūsu ziņojums</string>
+    <string name="title_body_hint">Tavs ziņojums</string>
     <string name="title_sending">Sūta &#8230;</string>
     <string name="title_sending_to">Sūta %1$s</string>
     <string name="title_send_via">Nosūtīt ar</string>
