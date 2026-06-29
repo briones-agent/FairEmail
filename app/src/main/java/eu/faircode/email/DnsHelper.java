@@ -77,6 +77,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Semaphore;
@@ -329,8 +330,12 @@ public class DnsHelper {
         if (!hasDnsSec())
             dnssec = false;
 
-        if (!dns_custom && !dnssec)
-            return InetAddress.getByName(host);
+        if (!dns_custom && !dnssec) {
+            InetAddress[] all = InetAddress.getAllByName(host);
+            if (all == null || all.length == 0)
+                throw new UnknownHostException(host);
+            return all[new Random().nextInt(all.length)];
+        }
 
         if (ConnectionHelper.isNumericAddress(host))
             return InetAddress.getByName(host);
