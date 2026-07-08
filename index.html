@@ -647,8 +647,8 @@ or by installing the GitHub version of the app (as an update) and enabling insec
 <p>The “<em>Gmail (Android)</em>” quick setup wizard won’t work if the Android account manager doesn’t work or doesn’t support Google accounts, which is typically the case if the account selection is being <em>canceled</em> right away.</p>
 <p>If you don’t want to use or can’t use OAuth or an on-device Google account, for example on recent Huawei devices, you can <del>either enable access for “less secure apps” and use your account password (not advised) or</del> enable two factor authentication and use an app specific password. To use a password, you can use the quick setup wizard and select <em>Other provider</em>.</p>
 <p><strong>Important</strong>: sometimes Google issues this alert:</p>
-<p><em>[ALERT] Please log in via your web browser: https://support.google.com/mail/accounts/answer/78754 (Failure)</em></p>
-<p>This Google security check is triggered more often with <em>less secure apps</em> enabled, even less with an app password, and hardly ever when using an on-device account (OAuth). You might see the error <em>OAUTH2 asked for more</em>, which basically says the connection is temporarily blocked, until you confirm it is you.</p>
+<p><em>[ALERT] Please log in via your web browser</em></p>
+<p><del>This Google security check is triggered more often with <em>less secure apps</em> enabled, even less with an app password, and hardly ever when using an on-device account (OAuth).</del> You might see the error <em>OAUTH2 asked for more</em>, which basically says the connection is temporarily blocked, until you confirm it is you.</p>
 <p>Note that an app specific password is required when two factor authentication is enabled. After enabling two factor authentication there will be this error message:</p>
 <p><em>[ALERT] Application-specific password required: https://support.google.com/mail/accounts/answer/185833 (Failure)</em></p>
 <p>The error message “<em>Authentication failed - Invalid credentials</em>” or <em>Token refresh required</em> means that the Android account manager was not able to refresh the access token, or that getting an access token was not allowed, for example when the account is a <a href="https://support.google.com/families/answer/7101025">Family Link</a> account or any other delegated account, in which case you can use the Gmail app only. A common cause for this problem is using a VPN, a firewall app or an ad blocker which blocks internet access for the Android account manager. Please make sure permissions were granted to the app via setup step 2. You can try to work around this issue by using the quick setup wizard <em>Gmail (Oauth)</em> or by using an app password.</p>
@@ -1305,7 +1305,7 @@ X-Google-Original-From: Somebody &lt;somebody+extra@example.org&gt;</code></pre>
 <p>FairEmail will by default synchronize the folder list on each connection. Since folders are mostly not created, renamed and deleted very often, you can save some network and battery usage by disabling this in the receive settings tab page.</p>
 <p>FairEmail will by default check if old messages were deleted from the server on each connection. If you don’t mind that old messages that were deleted from the server are still visible in FairEmail, you can save some network and battery usage by disabling this in the receive settings tab page.</p>
 <p>Some providers don’t follow the IMAP standard and <a href="https://datatracker.ietf.org/doc/html/rfc3501#section-5.4">don’t keep connections open</a> long enough, forcing FairEmail to reconnect often, causing extra battery usage. You can inspect the <em>Log</em> via the main navigation menu to check if there are frequent reconnects (connection closed/reset, read/write error/timeout, etc.). You can work around this by lowering the keep-alive interval in the advanced account settings to for example 9 or 15 minutes. Note that battery optimizations need to be disabled in setup step 3 to reliably keep connections alive.</p>
-<p>Some providers send every two minutes something like ‘<em>Still here</em>’ resulting in network traffic and your device to wake up and causing unnecessary extra battery usage. You can inspect the <em>Log</em> via the main navigation menu to check if your provider is doing this. If your provider is using <a href="https://www.dovecot.org/">Dovecot</a> as IMAP server, you could ask your provider to change the <a href="https://wiki.dovecot.org/Timeouts">imap_idle_notify_interval</a> setting to a higher value or better yet, to disable this. If your provider is not able or willing to change/disable this, you should consider switching to periodically instead of continuous synchronization. You can change this in the receive settings tab page.</p>
+<p>Some providers send every two minutes something like ‘<em>Still here</em>’ resulting in network traffic and your device to wake up and causing unnecessary extra battery usage. You can inspect the <em>Log</em> via the main navigation menu to check if your provider is doing this. If your provider is using <a href="https://www.dovecot.org/">Dovecot</a> as IMAP server, you could ask your provider to change the <a href="https://doc.dovecot.org/2.3/admin_manual/timeouts/">imap_idle_notify_interval</a> setting to a higher value or better yet, to disable this. If your provider is not able or willing to change/disable this, you should consider switching to periodically instead of continuous synchronization. You can change this in the receive settings tab page.</p>
 <p>If you got the message, <em>This provider does not support push messages</em> while configuring an account, consider switching to a modern provider which supports push messages (IMAP IDLE) to reduce battery usage.</p>
 <p>If your device has an <a href="https://en.wikipedia.org/wiki/AMOLED">AMOLED</a> screen, you can save battery usage while viewing messages by switching to the black theme.</p>
 <p>If auto optimize in the receive settings tab page is enabled, an account will automatically be switched to periodically checking for new messages when the email server:</p>
@@ -1437,7 +1437,7 @@ X-Google-Original-From: Somebody &lt;somebody+extra@example.org&gt;</code></pre>
 <p><a name="faq56"></a> <strong>(56) Can you add support for JMAP?</strong></p>
 <p>🌎 <a href="https://translate.google.com/translate?sl=en&amp;u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq56">Google Translate</a></p>
 <p>There are almost no providers offering the <a href="https://jmap.io/">JMAP</a> protocol, so it is not worth a lot of effort to add support for this to FairEmail.</p>
-<p>Moreover, the only available <a href="https://github.com/iNPUTmice/jmap">Java JMAP library</a> seems not to be maintained anymore.</p>
+<p>Moreover, the only available <a href="https://codeberg.org/iNPUTmice/jmap">Java JMAP library</a> seems not to be maintained anymore.</p>
 <p><br /></p>
 <p><a name="faq57"></a> <strong>(57) Can I use HTML in signatures?</strong></p>
 <p>🌎 <a href="https://translate.google.com/translate?sl=en&amp;u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq57">Google Translate</a></p>
@@ -2159,7 +2159,7 @@ category:promotions</code></pre>
 <ul>
 <li><a href="https://restoreprivacy.com/secure-email/">Restore privacy</a></li>
 <li><a href="https://www.privacyguides.org/en/email/">Privacy Guides</a></li>
-<li><a href="https://www.privacytools.io/providers/email/">Privacy Tools</a></li>
+<li><a href="https://privacytools.io/privacy-email">Privacy Tools</a></li>
 </ul>
 <p><strong>Important</strong>: Some providers, like ProtonMail and Tutanota, use proprietary email protocols, which make it impossible to use third party email apps. Please see <a href="#faq129">this FAQ</a> for more information.</p>
 <p>Using your own (custom) domain name, which is supported by most email providers, will make it easier to switch to another email provider.</p>
@@ -2337,13 +2337,15 @@ $NotDisplayed</code></pre>
 <p><br /></p>
 <p><a name="faq129"></a> <strong>(129) Are ProtonMail, Tutanota, etc supported?</strong></p>
 <p>🌎 <a href="https://translate.google.com/translate?sl=en&amp;u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq129">Google Translate</a></p>
-<p><strong>ProtonMail</strong> uses a proprietary email protocol and <a href="https://protonmail.com/support/knowledge-base/imap-smtp-and-pop3-setup/">does not directly support IMAP</a>, so you cannot use FairEmail or any other Android email client to access ProtonMail. Unfortunately, Proton has no plans to add <a href="https://github.com/ProtonMail/proton-bridge/issues/427">a mail bridge for Android</a>.</p>
-<p><strong>Tutanota</strong> uses a proprietary email protocol and <a href="https://tutanota.com/faq/#imap">does not support IMAP</a>, so you cannot use FairEmail or any other email client to access Tutanota.</p>
+<p><strong>ProtonMail</strong> uses a proprietary email protocol and <a href="https://protonmail.com/support/knowledge-base/imap-smtp-and-pop3-setup/">does not directly support IMAP</a>, so you cannot use FairEmail or any other Android email client to access ProtonMail. Unfortunately, Proton has no plans to add a mail bridge for Android.</p>
+<p><strong>Tutanota</strong> uses a proprietary email protocol and <a href="https://tuta.com/support#imap">does not support IMAP</a>, so you cannot use FairEmail or any other email client to access Tutanota.</p>
 <p><strong>Cyberfear</strong> does not support IMAP, so you’ll need to manually configure a POP3 account.</p>
-<p><strong>Skiff</strong> uses a proprietary email protocol and <a href="https://www.skiff.com/blog/tutanota-alternatives-comparison">does not support IMAP</a> so you cannot use FairEmail or any other email client to access Skiff.</p>
+<p><strong>Skiff</strong> uses a proprietary email protocol and <a href="https://www.skiff.com/">does not support IMAP</a> so you cannot use FairEmail or any other email client to access Skiff.</p>
+<p>Update: Skiff was shut down after the Notion acquisition (2024).</p>
 <p><strong>Tildamail</strong> uses a proprietary email protocol and does not support IMAP, so you cannot use FairEmail or any other email client to access Tildamail.</p>
 <p><strong>Criptext</strong> uses a proprietary email protocol and <a href="https://www.reddit.com/r/privacy/comments/chs82k/comment/ewrxxcn/">does not directly support IMAP</a>, so you cannot use FairEmail or any other email email client to access Criptext.</p>
 <p><strong>OnMail</strong> uses a proprietary email protocol and <a href="https://support.onmail.com/hc/en-us/articles/360048879012-How-do-I-connect-my-OnMail-address-to-a-third-party-email-app-">does not support IMAP</a>, so you cannot use FairEmail or any other email client to access OnMail, except for one (but please read the privacy policy carefully).</p>
+<p>Update: OnMail is gone.</p>
 <p><br /></p>
 <p><a name="faq130"></a> <strong>(130) What does message error … mean?</strong></p>
 <p>🌎 <a href="https://translate.google.com/translate?sl=en&amp;u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq130">Google Translate</a></p>

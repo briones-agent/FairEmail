@@ -769,9 +769,9 @@ To use a password, you can use the quick setup wizard and select *Other provider
 
 **Important**: sometimes Google issues this alert:
 
-*[ALERT] Please log in via your web browser: https://support.google.com/mail/accounts/answer/78754 (Failure)*
+*[ALERT] Please log in via your web browser*
 
-This Google security check is triggered more often with *less secure apps* enabled, even less with an app password, and hardly ever when using an on-device account (OAuth).
+~~This Google security check is triggered more often with *less secure apps* enabled, even less with an app password, and hardly ever when using an on-device account (OAuth).~~
 You might see the error *OAUTH2 asked for more*, which basically says the connection is temporarily blocked, until you confirm it is you.
 
 Note that an app specific password is required when two factor authentication is enabled.
@@ -2283,7 +2283,7 @@ Note that battery optimizations need to be disabled in setup step 3 to reliably 
 Some providers send every two minutes something like '*Still here*' resulting in network traffic and your device to wake up and causing unnecessary extra battery usage.
 You can inspect the *Log* via the main navigation menu to check if your provider is doing this.
 If your provider is using [Dovecot](https://www.dovecot.org/) as IMAP server,
-you could ask your provider to change the [imap_idle_notify_interval](https://wiki.dovecot.org/Timeouts) setting to a higher value or better yet, to disable this.
+you could ask your provider to change the [imap_idle_notify_interval](https://doc.dovecot.org/2.3/admin_manual/timeouts/) setting to a higher value or better yet, to disable this.
 If your provider is not able or willing to change/disable this, you should consider switching to periodically instead of continuous synchronization.
 You can change this in the receive settings tab page.
 
@@ -2605,7 +2605,7 @@ Then use the three dot action button to execute the desired action.
 There are almost no providers offering the [JMAP](https://jmap.io/) protocol,
 so it is not worth a lot of effort to add support for this to FairEmail.
 
-Moreover, the only available [Java JMAP library](https://github.com/iNPUTmice/jmap) seems not to be maintained anymore.
+Moreover, the only available [Java JMAP library](https://codeberg.org/iNPUTmice/jmap) seems not to be maintained anymore.
 
 <br />
 
@@ -4112,7 +4112,7 @@ Please see these websites for lists of privacy oriented email providers with adv
 
 * [Restore privacy](https://restoreprivacy.com/secure-email/)
 * [Privacy Guides](https://www.privacyguides.org/en/email/)
-* [Privacy Tools](https://www.privacytools.io/providers/email/)
+* [Privacy Tools](https://privacytools.io/privacy-email)
 
 **Important**: Some providers, like ProtonMail and Tutanota, use proprietary email protocols, which make it impossible to use third party email apps.
 Please see [this FAQ](#faq129) for more information.
@@ -4511,17 +4511,19 @@ You can reset asked questions via the three dots overflow menu in the miscellane
 **ProtonMail** uses a proprietary email protocol
 and [does not directly support IMAP](https://protonmail.com/support/knowledge-base/imap-smtp-and-pop3-setup/),
 so you cannot use FairEmail or any other Android email client to access ProtonMail.
-Unfortunately, Proton has no plans to add [a mail bridge for Android](https://github.com/ProtonMail/proton-bridge/issues/427).
+Unfortunately, Proton has no plans to add a mail bridge for Android.
 
 **Tutanota** uses a proprietary email protocol
-and [does not support IMAP](https://tutanota.com/faq/#imap),
+and [does not support IMAP](https://tuta.com/support#imap),
 so you cannot use FairEmail or any other email client to access Tutanota.
 
 **Cyberfear** does not support IMAP, so you'll need to manually configure a POP3 account.
 
 **Skiff** uses a proprietary email protocol
-and [does not support IMAP](https://www.skiff.com/blog/tutanota-alternatives-comparison)
+and [does not support IMAP](https://www.skiff.com/)
 so you cannot use FairEmail or any other email client to access Skiff.
+
+Update: Skiff was shut down after the Notion acquisition (2024).
 
 **Tildamail** uses a proprietary email protocol and does not support IMAP,
 so you cannot use FairEmail or any other email client to access Tildamail.
@@ -4533,6 +4535,8 @@ so you cannot use FairEmail or any other email email client to access Criptext.
 **OnMail** uses a proprietary email protocol
 and [does not support IMAP](https://support.onmail.com/hc/en-us/articles/360048879012-How-do-I-connect-my-OnMail-address-to-a-third-party-email-app-),
 so you cannot use FairEmail or any other email client to access OnMail, except for one (but please read the privacy policy carefully).
+
+Update: OnMail is gone.
 
 <br />
 
