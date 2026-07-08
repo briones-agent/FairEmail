@@ -197,6 +197,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.InetAddress;
 import java.security.KeyStore;
 import java.security.Principal;
 import java.security.PrivateKey;
@@ -3257,7 +3258,7 @@ public class FragmentMessages extends FragmentBase
             else if (EntityMessage.SWIPE_ACTION_HIDE.equals(action))
                 icon = (message.ui_snoozed == null ? R.drawable.twotone_visibility_off_24 :
                         (message.ui_snoozed == Long.MAX_VALUE
-                                ? R.drawable.twotone_visibility_24 : R.drawable.twotone_timer_off_24));
+                         ? R.drawable.twotone_visibility_24 : R.drawable.twotone_timer_off_24));
             else if (EntityMessage.SWIPE_ACTION_MOVE.equals(action))
                 icon = R.drawable.twotone_folder_24;
             else if (EntityMessage.SWIPE_ACTION_TTS.equals(action))
@@ -5905,7 +5906,8 @@ public class FragmentMessages extends FragmentBase
                         if (!checkFingerprint())
                             if (!checkGmail())
                                 if (!checkOutlook())
-                                    ;
+                                    if (!checkLan())
+                                        ;
 
         prefs.registerOnSharedPreferenceChangeListener(this);
         onSharedPreferenceChanged(prefs, "notifications_reminder");
@@ -6400,6 +6402,68 @@ public class FragmentMessages extends FragmentBase
                 Log.e(ex);
             }
         }.execute(this, new Bundle(), "outlook:check");
+
+        return false;
+    }
+
+    private boolean checkLan() {
+        new SimpleTask<Boolean>() {
+            @Override
+            protected Boolean onExecute(Context context, Bundle args) throws Throwable {
+                if (Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK))
+                    return false;
+
+                DB db = DB.getInstance(context);
+                List<EntityAccount> accounts = db.account().getSynchronizingAccounts(null);
+                if (accounts != null)
+                    for (EntityAccount account : accounts)
+                        try {
+                            InetAddress addr = InetAddress.getByName(account.host);
+                            if (addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress())
+                                return true;
+
+                            List<EntityIdentity> identities = db.identity().getSynchronizingIdentities(account.id);
+                            if (identities != null)
+                                for (EntityIdentity identity : identities)
+                                    try {
+                                        addr = InetAddress.getByName(identity.host);
+                                        if (addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress())
+                                            return true;
+                                    } catch (Throwable ignored) {
+                                    }
+                        } catch (Throwable ignored) {
+                        }
+
+                return false;
+            }
+
+            @Override
+            protected void onExecuted(Bundle args, Boolean lan) {
+                if (!Boolean.TRUE.equals(lan))
+                    return;
+
+                final Snackbar snackbar = Helper.setSnackbarOptions(Snackbar.make(view, R.string.title_lan_required, Snackbar.LENGTH_INDEFINITE));
+                Helper.setSnackbarLines(snackbar, 5);
+                snackbar.setAction(R.string.title_fix, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                        if (BuildConfig.PLAY_STORE_RELEASE)
+                            Helper.viewFAQ(v.getContext(), 210);
+                        else
+                            v.getContext().startActivity(new Intent(v.getContext(), ActivitySetup.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    .putExtra("tab", "connection"));
+                    }
+                });
+                snackbar.show();
+            }
+
+            @Override
+            protected void onException(Bundle args, Throwable ex) {
+                Log.unexpectedError(getParentFragmentManager(), ex);
+            }
+        }.execute(this, new Bundle(), "checklan");
 
         return true;
     }
