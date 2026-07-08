@@ -69,6 +69,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.FileNotFoundException;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -310,10 +311,13 @@ public class FragmentIdentity extends FragmentBase {
                         spProvider.setTag(0);
                         spProvider.setSelection(0);
                         setProvider((EmailProvider) spProvider.getItemAtPosition(0));
-                        if (account.host == null || account.host.startsWith("imap"))
+                        if (account.host == null || account.host.startsWith("imap")) {
                             etHost.setText(null);
-                        else
+                            checkLan(null);
+                        } else {
                             etHost.setText(account.host);
+                            checkLan(account.host);
+                        }
                         grpAdvanced.setVisibility(View.VISIBLE);
                     }
 
@@ -460,6 +464,23 @@ public class FragmentIdentity extends FragmentBase {
             @Override
             public void onClick(View v) {
                 onAutoConfig();
+            }
+        });
+
+        etHost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkLan(s == null ? null : s.toString());
             }
         });
 
@@ -691,6 +712,7 @@ public class FragmentIdentity extends FragmentBase {
 
     private void setProvider(EmailProvider provider) {
         etHost.setText(provider.smtp.host);
+        checkLan(provider.smtp.host);
         etPort.setText(provider.smtp.port == 0 ? null : Integer.toString(provider.smtp.port));
         rgEncryption.check(provider.smtp.starttls ? R.id.radio_starttls : R.id.radio_ssl);
         cbUseIp.setChecked(provider.useip);
@@ -730,6 +752,7 @@ public class FragmentIdentity extends FragmentBase {
             @Override
             protected void onExecuted(Bundle args, EmailProvider provider) {
                 etHost.setText(provider.smtp.host);
+                checkLan(provider.smtp.host);
                 etPort.setText(Integer.toString(provider.smtp.port));
                 rgEncryption.check(provider.smtp.starttls ? R.id.radio_starttls : R.id.radio_ssl);
                 cbUseIp.setChecked(provider.useip);
@@ -1353,6 +1376,7 @@ public class FragmentIdentity extends FragmentBase {
 
                     cbDnsSec.setChecked(identity == null ? false : identity.dnssec);
                     etHost.setText(identity == null ? null : identity.host);
+                    checkLan(identity == null ? null : identity.host);
 
                     if (identity != null && identity.encryption == EmailService.ENCRYPTION_STARTTLS)
                         rgEncryption.check(R.id.radio_starttls);
@@ -1682,6 +1706,21 @@ public class FragmentIdentity extends FragmentBase {
                 Log.unexpectedError(getParentFragmentManager(), ex);
             }
         }.execute(this, args, "identity:signature");
+    }
+
+    private void checkLan(String host) {
+        String msg = null;
+        if (!TextUtils.isEmpty(host))
+            try {
+                Context context = getContext();
+                InetAddress addr = InetAddress.getByName(host);
+                if ((addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress()) &&
+                        !Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK))
+                    msg = context.getString(R.string.title_lan);
+            } catch (Throwable ignored) {
+            }
+
+        etHost.setError(msg);
     }
 
     private void onPickUri(Intent intent) {

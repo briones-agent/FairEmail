@@ -74,6 +74,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -335,6 +336,7 @@ public class FragmentAccount extends FragmentBase {
                 adapterView.setTag(position);
 
                 etHost.setText(provider.imap.host);
+                checkLan(provider.imap.host);
                 etPort.setText(provider.imap.host == null ? null : Integer.toString(provider.imap.port));
                 rgEncryption.check(provider.imap.starttls ? R.id.radio_starttls : R.id.radio_ssl);
 
@@ -369,6 +371,23 @@ public class FragmentAccount extends FragmentBase {
             @Override
             public void onClick(View v) {
                 onAutoConfig();
+            }
+        });
+
+        etHost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkLan(s == null ? null : s.toString());
             }
         });
 
@@ -749,6 +768,7 @@ public class FragmentAccount extends FragmentBase {
             @Override
             protected void onExecuted(Bundle args, EmailProvider provider) {
                 etHost.setText(provider.imap.host);
+                checkLan(provider.imap.host);
                 etPort.setText(Integer.toString(provider.imap.port));
                 rgEncryption.check(provider.imap.starttls ? R.id.radio_starttls : R.id.radio_ssl);
             }
@@ -1749,6 +1769,7 @@ public class FragmentAccount extends FragmentBase {
                             spProvider.setSelection(1);
                         }
                         etHost.setText(account.host);
+                        checkLan(account.host);
                         etPort.setText(Long.toString(account.port));
                     }
 
@@ -2144,6 +2165,21 @@ public class FragmentAccount extends FragmentBase {
                 Log.unexpectedError(getParentFragmentManager(), ex);
             }
         }.execute(this, args, "account:delete");
+    }
+
+    private void checkLan(String host) {
+        String msg = null;
+        if (!TextUtils.isEmpty(host))
+            try {
+                Context context = getContext();
+                InetAddress addr = InetAddress.getByName(host);
+                if ((addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress()) &&
+                        !Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK))
+                    msg = context.getString(R.string.title_lan);
+            } catch (Throwable ignored) {
+            }
+
+        etHost.setError(msg);
     }
 
     private void setFolders(List<EntityFolder> _folders, EntityAccount account) {

@@ -65,6 +65,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONObject;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -223,6 +224,23 @@ public class FragmentPop extends FragmentBase {
 
         this.colorWarning = Helper.resolveColor(getContext(), R.attr.colorWarning);
         this.textColorSecondary = Helper.resolveColor(getContext(), android.R.attr.textColorSecondary);
+
+        etHost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkLan(s == null ? null : s.toString());
+            }
+        });
 
         rgEncryption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -938,6 +956,7 @@ public class FragmentPop extends FragmentBase {
 
                     cbDnsSec.setChecked(account == null ? false : account.dnssec);
                     etHost.setText(account == null ? null : account.host);
+                    checkLan(account == null ? null : account.host);
                     etPort.setText(account == null ? null : Long.toString(account.port));
 
                     if (account != null && account.encryption == EmailService.ENCRYPTION_STARTTLS)
@@ -1204,6 +1223,21 @@ public class FragmentPop extends FragmentBase {
                 Log.unexpectedError(getParentFragmentManager(), ex);
             }
         }.execute(this, args, "account:delete");
+    }
+
+    private void checkLan(String host) {
+        String msg = null;
+        if (!TextUtils.isEmpty(host))
+            try {
+                Context context = getContext();
+                InetAddress addr = InetAddress.getByName(host);
+                if ((addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress()) &&
+                        !Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK))
+                    msg = context.getString(R.string.title_lan);
+            } catch (Throwable ignored) {
+            }
+
+        etHost.setError(msg);
     }
 
     private List<EntityFolder> getSwipeActions(Context context) {

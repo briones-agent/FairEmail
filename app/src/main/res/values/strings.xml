@@ -1302,6 +1302,7 @@
     <string name="title_imap" translatable="false">IMAP</string>
     <string name="title_pop3" translatable="false">POP3</string>
     <string name="title_smtp" translatable="false">SMTP</string>
+    <string name="title_lan">Local network permissions must be granted on the connection settings tab page</string>
     <string name="title_aliases">Aliases</string>
     <string name="title_provider">Provider</string>
     <string name="title_custom">Custom</string>

@@ -455,6 +455,7 @@ Anything on this list is in random order and *might* be added in the near future
 * [(207) What does 'Authentication failed' mean?](#faq207)
 * [(208) What does 'about:blank#blocked' mean when I click on a link?](#faq208)
 * [(209) Why is using a VPN often problematic?](#faq209)
+* [(210) Why are local network permissions needed?](#faq210)
 
 [I have another question.](#get-support)
 
@@ -6507,6 +6508,24 @@ The result is that logins are blocked for everyone using the same network addres
 This is also why the app warns against using a VPN.
 
 <br>
+
+<a name="faq210"></a>
+**(210) Why are local network permissions needed?**
+
+&#x1F30E; [Google Translate](https://translate.google.com/translate?sl=en&u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq210)
+
+Since Android 17, Android requires [local network permission](https://developer.android.com/privacy-and-security/local-network-permission) for local network access (LAN access).
+
+This permission can be granted via a button on the connection settings page.
+
+Very few people will need LAN access, and to avoid questions regarding a new permission, this permission is available only in the [GitHub version](https://github.com/M66B/FairEmail/releases).
+
+If the app navigated to this FAQ after you clicked the button to grant local network permissions, then the GitHub version is not (or is no longer) installed.
+
+Added in version 1.2325.
+
+<br>
+
 
 <h2><a name="get-support"></a>Get support</h2>
 
