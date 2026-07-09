@@ -1473,13 +1473,14 @@ public class MessageHelper {
                     BodyPart attachmentPart = new MimeBodyPart();
 
                     File file = attachment.getFile(context);
+                    boolean isUtf8 = (attachment.type != null && attachment.type.startsWith("text/") && CharsetHelper.isUTF8(file));
 
                     FileDataSource dataSource = new FileDataSource(file);
                     dataSource.setFileTypeMap(new FileTypeMap() {
                         @Override
                         public String getContentType(File file) {
                             // https://tools.ietf.org/html/rfc6047
-                            if ("text/calendar".equals(attachment.type))
+                            if ("text/calendar".equals(attachment.type) || isUtf8)
                                 return attachment.type + "; charset=UTF-8;";
 
                             return attachment.type;
