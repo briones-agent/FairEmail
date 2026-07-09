@@ -6410,6 +6410,8 @@ public class FragmentMessages extends FragmentBase
         new SimpleTask<Boolean>() {
             @Override
             protected Boolean onExecute(Context context, Bundle args) throws Throwable {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.CINNAMON_BUN)
+                    return false;
                 if (Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK))
                     return false;
 

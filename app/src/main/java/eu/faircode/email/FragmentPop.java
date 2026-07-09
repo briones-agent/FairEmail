@@ -1167,6 +1167,12 @@ public class FragmentPop extends FragmentBase {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Editable e = etHost.getText();
+        checkLan(e == null ? null : e.toString());
+    }
+
     private void onImageSelected(Uri uri) {
         final Context context = getContext();
 
@@ -1225,19 +1231,48 @@ public class FragmentPop extends FragmentBase {
         }.execute(this, args, "account:delete");
     }
 
+    private Snackbar lanSnackbar = null;
+
     private void checkLan(String host) {
-        String msg = null;
-        if (!TextUtils.isEmpty(host))
+        boolean lan = false;
+        if (!TextUtils.isEmpty(host) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN)
             try {
                 Context context = getContext();
                 InetAddress addr = InetAddress.getByName(host);
-                if ((addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress()) &&
-                        !Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK))
-                    msg = context.getString(R.string.title_lan);
+                lan = (addr.isSiteLocalAddress() || addr.isLinkLocalAddress() || addr.isLoopbackAddress()) &&
+                        !Helper.hasPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK);
             } catch (Throwable ignored) {
             }
 
-        etHost.setError(msg);
+        if (lan && lanSnackbar == null) {
+            lanSnackbar = Helper.setSnackbarOptions(Snackbar.make(view, R.string.title_lan_required, Snackbar.LENGTH_INDEFINITE));
+            Helper.setSnackbarLines(lanSnackbar, 2);
+            lanSnackbar.setAction(R.string.title_fix, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lanSnackbar.dismiss();
+                    if (BuildConfig.PLAY_STORE_RELEASE)
+                        Helper.viewFAQ(v.getContext(), 210);
+                    else
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_LOCAL_NETWORK}, REQUEST_PERMISSIONS);
+                }
+            });
+            lanSnackbar.addCallback(new Snackbar.Callback() {
+                @Override
+                public void onShown(Snackbar sb) {
+                    view.requestApplyInsets();
+                }
+
+                @Override
+                public void onDismissed(Snackbar transientBottomBar, int event) {
+                    view.requestApplyInsets();
+                }
+            });
+            lanSnackbar.show();
+        } else if (!lan && lanSnackbar != null) {
+            lanSnackbar.dismiss();
+            lanSnackbar = null;
+        }
     }
 
     private List<EntityFolder> getSwipeActions(Context context) {
