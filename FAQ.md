@@ -455,7 +455,7 @@ Anything on this list is in random order and *might* be added in the near future
 * [(207) What does 'Authentication failed' mean?](#faq207)
 * [(208) What does 'about:blank#blocked' mean when I click on a link?](#faq208)
 * [(209) Why is using a VPN often problematic?](#faq209)
-* [(210) Why are local network permissions needed?](#faq210)
+* [(210) Why is local network permission needed?](#faq210)
 
 [I have another question.](#get-support)
 
@@ -6510,17 +6510,23 @@ This is also why the app warns against using a VPN.
 <br>
 
 <a name="faq210"></a>
-**(210) Why are local network permissions needed?**
+**(210) Why is local network permission needed?**
 
 &#x1F30E; [Google Translate](https://translate.google.com/translate?sl=en&u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq210)
 
-Since Android 17, Android requires [local network permission](https://developer.android.com/privacy-and-security/local-network-permission) for local network access (LAN access).
+Since Android 17, [local network permission](https://developer.android.com/privacy-and-security/local-network-permission) is required for local network access (LAN access):
 
-This permission can be granted via a button on the connection settings page.
+* 10.0.0.0/8
+* 172.16.0.0/12
+* 192.168.0.0/16
+* fd00::/8
 
-Very few people will need LAN access, and to avoid questions regarding a new permission, this permission is available only in the [GitHub version](https://github.com/M66B/FairEmail/releases).
+This permission can be granted via a button on the connection settings page, or inline via the account/identity settings screen after entering a local network address.
 
-If the app navigated to this FAQ after you clicked the button to grant local network permissions, then the GitHub version is not (or is no longer) installed.
+Very few people will need local network access, and to avoid questions regarding a new permission, this permission is available only in the [GitHub version](https://github.com/M66B/FairEmail/releases).
+
+If the app navigated to this FAQ after you clicked the button to grant local network permission, then the GitHub version is not (or is no longer) installed.
+If you are using the Play Store version of the app, you can install the GitHub version as an update.
 
 Added in version 1.2325.
 

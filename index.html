@@ -443,7 +443,7 @@
 <li><a href="#faq207">(207) What does ‘Authentication failed’ mean?</a></li>
 <li><a href="#faq208">(208) What does ‘about:blank#blocked’ mean when I click on a link?</a></li>
 <li><a href="#faq209">(209) Why is using a VPN often problematic?</a></li>
-<li><a href="#faq210">(210) Why are local network permissions needed?</a></li>
+<li><a href="#faq210">(210) Why is local network permission needed?</a></li>
 </ul>
 <p><a href="#get-support">I have another question.</a></p>
 <p><a name="faq1"></a> <strong>(1) Which permissions are needed and why?</strong></p>
@@ -3247,12 +3247,18 @@ adb install /path/to/FairEmail-xxx.apk</code></pre>
 <p>🌎 <a href="https://translate.google.com/translate?sl=en&amp;u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq209">Google Translate</a></p>
 <p>When you use a VPN, you share one network address with many people and not all those people will always behave nicely. Email servers often automatically block network addresses (IP addresses) when abuse is detected, for example when someone tries to send spam messages. The result is that logins are blocked for everyone using the same network address and the email server issues an error message such as “<em>Authentication failed</em>”. This is also why the app warns against using a VPN.</p>
 <p><br></p>
-<p><a name="faq210"></a> <strong>(210) Why are local network permissions needed?</strong></p>
+<p><a name="faq210"></a> <strong>(210) Why is local network permission needed?</strong></p>
 <p>🌎 <a href="https://translate.google.com/translate?sl=en&amp;u=https%3A%2F%2Fm66b.github.io%2FFairEmail%2F%23faq210">Google Translate</a></p>
-<p>Since Android 17, Android requires <a href="https://developer.android.com/privacy-and-security/local-network-permission">local network permission</a> for local network access (LAN access).</p>
-<p>This permission can be granted via a button on the connection settings page.</p>
-<p>Very few people will need LAN access, and to avoid questions regarding a new permission, this permission is available only in the <a href="https://github.com/M66B/FairEmail/releases">GitHub version</a>.</p>
-<p>If the app navigated to this FAQ after you clicked the button to grant local network permissions, then the GitHub version is not (or is no longer) installed.</p>
+<p>Since Android 17, <a href="https://developer.android.com/privacy-and-security/local-network-permission">local network permission</a> is required for local network access (LAN access):</p>
+<ul>
+<li>10.0.0.0/8</li>
+<li>172.16.0.0/12</li>
+<li>192.168.0.0/16</li>
+<li>fd00::/8</li>
+</ul>
+<p>This permission can be granted via a button on the connection settings page, or inline via the account/identity settings screen after entering a local network address.</p>
+<p>Very few people will need local network access, and to avoid questions regarding a new permission, this permission is available only in the <a href="https://github.com/M66B/FairEmail/releases">GitHub version</a>.</p>
+<p>If the app navigated to this FAQ after you clicked the button to grant local network permission, then the GitHub version is not (or is no longer) installed. If you are using the Play Store version of the app, you can install the GitHub version as an update.</p>
 <p>Added in version 1.2325.</p>
 <p><br></p>
 <h2>
