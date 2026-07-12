@@ -6388,7 +6388,9 @@ public class FragmentCompose extends FragmentBase {
                             if (quote) {
                                 String style = e.attr("style");
                                 style = HtmlHelper.mergeStyles(style, HtmlHelper.getQuoteStyle(e));
-                                e.tagName("blockquote").attr("style", style);
+                                e.tagName("blockquote")
+                                        .attr("style", style)
+                                        .attr("type", HtmlHelper.getQuoteType());
                             } else
                                 e.tagName("p");
                             reply.appendChild(e);
