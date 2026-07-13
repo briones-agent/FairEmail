@@ -30,6 +30,11 @@ For support you can use [the contact form](https://contact.faircode.eu/?product=
 
 ### Next version (Work in progress)
 
+* Added helpers to grant [local network permission](https://m66b.github.io/FairEmail/#faq210)
+* Enabled [Certificate Transparency](https://en.wikipedia.org/wiki/Certificate_Transparency) for non Play Store builds
+* Fixed character set for sending text files in some cases
+* Small improvements and minor bug fixes
+
 ### 1.2325 2026-07-04
 
 * Fixed a [security issue](https://github.com/M66B/FairEmail/security/advisories/GHSA-w92m-2v27-mvg9)

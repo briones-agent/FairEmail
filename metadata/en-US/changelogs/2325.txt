@@ -30,6 +30,11 @@ Elopteryx
 
 Next version (Work in progress)
 
+* Added helpers to grant local network permission
+* Enabled Certificate Transparency for non Play Store builds
+* Fixed character set for sending text files in some cases
+* Small improvements and minor bug fixes
+
 1.2325 2026-07-04
 
 * Fixed a security issue
