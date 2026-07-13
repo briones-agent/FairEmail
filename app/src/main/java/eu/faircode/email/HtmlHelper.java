@@ -2759,6 +2759,8 @@ public class HtmlHelper {
     }
 
     static String getQuoteType() {
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=882181#c1
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=183219#c50
         // https://github.com/mozilla-firefox/firefox/blob/aaf0207c409c5f6479cc92bc1bf407a453d63cdc/editor/libeditor/HTMLEditUtils.cpp#L804
         return "cite"; // Non standard
     }
