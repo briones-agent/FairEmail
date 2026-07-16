@@ -4725,9 +4725,12 @@ The confusing Microsoft specific server error *User is authenticated but not con
 **Consumer Outlook/Hotmail/Live account**
 
 * A VPN is being used. Try turning off the VPN.
+* The Outlook account is registered in another country than the current country.
+* The same account is configured in multiple email clients, also on other devices.
+* Multiple Outlook accounts are being used at the same time.
 * IMAP is disabled, which is the default for new Outlook accounts now
 
-To fix this:
+To fix the latter:
 
 * Go to the [Outlook website](https://outlook.live.com/)
 * Tap on the settings wheel at the top right
