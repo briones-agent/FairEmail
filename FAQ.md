@@ -930,10 +930,10 @@ if your provider allows this. Considering the email address test@example.org you
 You can configure a default CC, BCC and/or reply-to address in the advanced identity settings.
 Since version 1.2326 you can use the following placeholders in these default addressess:
 
-* $from$: the full 'from' address
-* $user$: the username of the 'from' address
-* $domain$: the domain name of the 'from' address
-* $extra$: the extra as explained above
+* `$from$`: the full 'from' address
+* `$user$`: the username of the 'from' address
+* `$domain$`: the domain name of the 'from' address
+* `$extra$`: the extra as explained above
 
 FairEmail will automatically update the passwords of related identities when you update the password of the associated account or a related identity.
 
@@ -3104,13 +3104,13 @@ $domain:to$ (since version 1.2289)
 $group$ (since version 1.2030)
 ```
 
-$user$ is the user name of the 'from' email address,
+`$user$` is the user name of the 'from' email address,
 and $domain$ is the domain name of the 'from' email address: *user@domain*.
 
-$extra$ is the part after the plus sign if the username: *user+extra@example.org*.
+`$extra$` is the part after the plus sign if the username: *user+extra@example.org*.
 The 'to' user, extra and domain placeholders apply to the 'to' email address and the other placeholders apply to 'from' email address.
 
-$group$ will be replaced with the contact group name of the sender, provided that the related contact is assigned to one contact group only.
+`$group$` will be replaced with the contact group name of the sender, provided that the related contact is assigned to one contact group only.
 Note that the Android contact provider isn't very fast, so using this placeholder can slow down fetching messages.
 
 <br />
@@ -3179,13 +3179,13 @@ Note that *regex* should be disabled and that there should be no white space.
 
 Please be aware that a difference in the *from* and *reply-to* domain, and no or multi *from* addresses isn't a good indication of spam.
 
-Since the app sets the keyword *$Filtered$* after the rules have been executed for a message,
+Since the app sets the keyword `$Filtered$` after the rules have been executed for a message,
 you can create a rule to prevent the rules from being executed again (which is sometimes desirable):
 
 * Name: anything you like
 * Order: lower than all other rules, for example 0
 * Stop processing rules after executing this rule: enabled
-* Header contains: *$$Filtered$* (no spaces)
+* Header contains: `$$Filtered$` (no spaces)
 * Action: No action
 
 Note that not all email servers support IMAP keywords.

@@ -710,10 +710,10 @@ or by installing the GitHub version of the app (as an update) and enabling insec
 </ul>
 <p>You can configure a default CC, BCC and/or reply-to address in the advanced identity settings. Since version 1.2326 you can use the following placeholders in these default addressess:</p>
 <ul>
-<li><span class="math inline"><em>f</em><em>r</em><em>o</em><em>m</em></span>: the full ‘from’ address</li>
-<li><span class="math inline"><em>u</em><em>s</em><em>e</em><em>r</em></span>: the username of the ‘from’ address</li>
-<li><span class="math inline"><em>d</em><em>o</em><em>m</em><em>a</em><em>i</em><em>n</em></span>: the domain name of the ‘from’ address</li>
-<li><span class="math inline"><em>e</em><em>x</em><em>t</em><em>r</em><em>a</em></span>: the extra as explained above</li>
+<li><code>$from$</code>: the full ‘from’ address</li>
+<li><code>$user$</code>: the username of the ‘from’ address</li>
+<li><code>$domain$</code>: the domain name of the ‘from’ address</li>
+<li><code>$extra$</code>: the extra as explained above</li>
 </ul>
 <p>FairEmail will automatically update the passwords of related identities when you update the password of the associated account or a related identity.</p>
 <p>See <a href="#faq33">this FAQ</a> on editing the username of email addresses.</p>
@@ -1712,9 +1712,9 @@ $user:to$ (since version 1.2289)
 $extra:to$ (since version 1.2289)
 $domain:to$ (since version 1.2289)
 $group$ (since version 1.2030)</code></pre>
-<p><span class="math inline"><em>u</em><em>s</em><em>e</em><em>r</em></span> is the user name of the ‘from’ email address, and <span class="math inline"><em>d</em><em>o</em><em>m</em><em>a</em><em>i</em><em>n</em></span> is the domain name of the ‘from’ email address: <em>user@domain</em>.</p>
-<p><span class="math inline"><em>e</em><em>x</em><em>t</em><em>r</em><em>a</em></span> is the part after the plus sign if the username: <em>user+extra@example.org</em>. The ‘to’ user, extra and domain placeholders apply to the ‘to’ email address and the other placeholders apply to ‘from’ email address.</p>
-<p><span class="math inline"><em>g</em><em>r</em><em>o</em><em>u</em><em>p</em></span> will be replaced with the contact group name of the sender, provided that the related contact is assigned to one contact group only. Note that the Android contact provider isn’t very fast, so using this placeholder can slow down fetching messages.</p>
+<p><code>$user$</code> is the user name of the ‘from’ email address, and <span class="math inline"><em>d</em><em>o</em><em>m</em><em>a</em><em>i</em><em>n</em></span> is the domain name of the ‘from’ email address: <em>user@domain</em>.</p>
+<p><code>$extra$</code> is the part after the plus sign if the username: <em>user+extra@example.org</em>. The ‘to’ user, extra and domain placeholders apply to the ‘to’ email address and the other placeholders apply to ‘from’ email address.</p>
+<p><code>$group$</code> will be replaced with the contact group name of the sender, provided that the related contact is assigned to one contact group only. Note that the Android contact provider isn’t very fast, so using this placeholder can slow down fetching messages.</p>
 <p><br /></p>
 <p>Since version 1.2132 it is possible to use the following placeholders in keywords:</p>
 <pre><code>$day$
@@ -1758,12 +1758,12 @@ $$encrypted$ (since version 1.1981)
 $$aligned$ (since version 1.2049)</code></pre>
 <p>Note that <em>regex</em> should be disabled and that there should be no white space.</p>
 <p>Please be aware that a difference in the <em>from</em> and <em>reply-to</em> domain, and no or multi <em>from</em> addresses isn’t a good indication of spam.</p>
-<p>Since the app sets the keyword <em><span class="math inline"><em>F</em><em>i</em><em>l</em><em>t</em><em>e</em><em>r</em><em>e</em><em>d</em></span></em> after the rules have been executed for a message, you can create a rule to prevent the rules from being executed again (which is sometimes desirable):</p>
+<p>Since the app sets the keyword <code>$Filtered$</code> after the rules have been executed for a message, you can create a rule to prevent the rules from being executed again (which is sometimes desirable):</p>
 <ul>
 <li>Name: anything you like</li>
 <li>Order: lower than all other rules, for example 0</li>
 <li>Stop processing rules after executing this rule: enabled</li>
-<li>Header contains: <em>$<span class="math inline"><em>F</em><em>i</em><em>l</em><em>t</em><em>e</em><em>r</em><em>e</em><em>d</em></span></em> (no spaces)</li>
+<li>Header contains: <code>$$Filtered$</code> (no spaces)</li>
 <li>Action: No action</li>
 </ul>
 <p>Note that not all email servers support IMAP keywords.</p>
