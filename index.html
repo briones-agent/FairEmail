@@ -708,7 +708,13 @@ or by installing the GitHub version of the app (as an update) and enabling insec
 <li>“<em><span class="citation" data-cites="extra">@extra</span></em>” will result in the email address “<em>test@extra.example.org</em>”</li>
 <li>“<em>Some name, username</em>” will result in the email address “<em>Some name, &lt;username@example.org&gt;</em>” (since version 1.2032)</li>
 </ul>
-<p>You can configure a default CC, BCC and/or reply-to address in the advanced identity settings.</p>
+<p>You can configure a default CC, BCC and/or reply-to address in the advanced identity settings. Since version 1.2326 you can use the following placeholders in these default addressess:</p>
+<ul>
+<li><span class="math inline"><em>f</em><em>r</em><em>o</em><em>m</em></span>: the full ‘from’ address</li>
+<li><span class="math inline"><em>u</em><em>s</em><em>e</em><em>r</em></span>: the username of the ‘from’ address</li>
+<li><span class="math inline"><em>d</em><em>o</em><em>m</em><em>a</em><em>i</em><em>n</em></span>: the domain name of the ‘from’ address</li>
+<li><span class="math inline"><em>e</em><em>x</em><em>t</em><em>r</em><em>a</em></span>: the extra as explained above</li>
+</ul>
 <p>FairEmail will automatically update the passwords of related identities when you update the password of the associated account or a related identity.</p>
 <p>See <a href="#faq33">this FAQ</a> on editing the username of email addresses.</p>
 <p><br /></p>

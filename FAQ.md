@@ -928,6 +928,12 @@ if your provider allows this. Considering the email address test@example.org you
 * "*Some name, username*" will result in the email address "*Some name, &lt;username@example.org&gt;*" (since version 1.2032)
 
 You can configure a default CC, BCC and/or reply-to address in the advanced identity settings.
+Since version 1.2326 you can use the following placeholders in these default addressess:
+
+* $from$: the full 'from' address
+* $user$: the username of the 'from' address
+* $domain$: the domain name of the 'from' address
+* $extra$: the extra as explained above
 
 FairEmail will automatically update the passwords of related identities when you update the password of the associated account or a related identity.
 

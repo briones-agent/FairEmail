@@ -549,15 +549,15 @@ public class MessageHelper {
                     (message.dsn == null || EntityMessage.DSN_NONE.equals(message.dsn))) {
                 // Add reply to
                 if (identity.replyto != null)
-                    imessage.setReplyTo(convertAddress(InternetAddress.parse(identity.replyto), identity));
+                    imessage.setReplyTo(convertAddress(InternetAddress.parse(replacePlaceholders(identity.replyto, message, identity)), identity));
 
                 // Add extra cc
                 if (identity.cc != null)
-                    addAddress(identity.cc, Message.RecipientType.CC, imessage, identity);
+                    addAddress(replacePlaceholders(identity.cc, message, identity), Message.RecipientType.CC, imessage, identity);
 
                 // Add extra bcc
                 if (identity.bcc != null)
-                    addAddress(identity.bcc, Message.RecipientType.BCC, imessage, identity);
+                    addAddress(replacePlaceholders(identity.bcc, message, identity), Message.RecipientType.BCC, imessage, identity);
             }
 
             // Delivery/read request
@@ -856,6 +856,24 @@ public class MessageHelper {
             name = null;
 
         return new InternetAddress(email, name, StandardCharsets.UTF_8.name());
+    }
+
+    static String replacePlaceholders(String address, EntityMessage message, EntityIdentity identity) throws UnsupportedEncodingException {
+        if (!TextUtils.isEmpty(address) &&
+                (address.contains("$from$")) || address.contains("$user$") || address.contains("$domain$") || address.contains("$extra$")) {
+            Address from = getFrom(message, identity);
+            if (from instanceof InternetAddress) {
+                String email = ((InternetAddress) from).getAddress();
+                String user = UriHelper.getEmailUser(email);
+                String domain = UriHelper.getEmailDomain(email);
+                address = address
+                        .replace("$from$", email)
+                        .replace("$user$", user)
+                        .replace("$domain$", domain)
+                        .replace("$extra$", message.extra == null ? "" : message.extra);
+            }
+        }
+        return address;
     }
 
     static String limitReferences(String ref) {
