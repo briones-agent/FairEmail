@@ -1733,7 +1733,7 @@ public class FragmentIdentity extends FragmentBase {
             @Override
             protected void onExecuted(Bundle args, Boolean data) {
                 boolean lan17 = Boolean.TRUE.equals(data);
-                if (lan17 && lanSnackbar == null) {
+                if (lan17 && lanSnackbar == null && view != null) {
                     lanSnackbar = Helper.setSnackbarOptions(Snackbar.make(view, R.string.title_lan_required, Snackbar.LENGTH_INDEFINITE));
                     Helper.setSnackbarLines(lanSnackbar, 2);
                     lanSnackbar.setAction(R.string.title_fix, new View.OnClickListener() {
@@ -1749,12 +1749,14 @@ public class FragmentIdentity extends FragmentBase {
                     lanSnackbar.addCallback(new Snackbar.Callback() {
                         @Override
                         public void onShown(Snackbar sb) {
-                            view.requestApplyInsets();
+                            if (view != null)
+                                view.requestApplyInsets();
                         }
 
                         @Override
                         public void onDismissed(Snackbar transientBottomBar, int event) {
-                            view.requestApplyInsets();
+                            if (view != null)
+                                view.requestApplyInsets();
                         }
                     });
                     lanSnackbar.show();
