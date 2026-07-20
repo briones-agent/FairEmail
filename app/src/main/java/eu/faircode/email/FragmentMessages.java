@@ -6545,6 +6545,8 @@ public class FragmentMessages extends FragmentBase
             boolean quick_filter = prefs.getBoolean("quick_filter", false);
             boolean all_read_asked = prefs.getBoolean("all_read_asked", false);
 
+            boolean selection = (getSelection().length > 0);
+
             boolean folder =
                     (viewType == AdapterMessage.ViewType.UNIFIED ||
                             (viewType == AdapterMessage.ViewType.FOLDER && !outbox));
@@ -6686,7 +6688,7 @@ public class FragmentMessages extends FragmentBase
             menu.findItem(R.id.menu_select_all).setVisible(folder);
             menu.findItem(R.id.menu_select_found).setVisible(viewType == AdapterMessage.ViewType.SEARCH);
             menu.findItem(R.id.menu_mark_all_read)
-                    .setVisible(folder)
+                    .setVisible(folder && !selection)
                     .setShowAsAction(all_read_asked ? MenuItem.SHOW_AS_ACTION_NEVER : MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
             menu.findItem(R.id.menu_view_thread).setVisible(viewType == AdapterMessage.ViewType.THREAD && !threading);
