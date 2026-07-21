@@ -6784,8 +6784,18 @@ public class FragmentCompose extends FragmentBase {
                             if (attachments == null)
                                 attachments = new ArrayList<>();
 
+                            boolean inline = (attachments.size() > 0);
+                            for (EntityAttachment attachment : attachments)
+                                if (!attachment.isInline()) {
+                                    inline = false;
+                                    break;
+                                }
+
+                            if (inline && (lastAttachments == null || lastAttachments == 0))
+                                ibExpanderAttachments.setTag(true); // Default hide all inline images
                             if (lastAttachments != null && attachments.size() > lastAttachments)
-                                ibExpanderAttachments.setTag(false);
+                                ibExpanderAttachments.setTag(inline && !Boolean.FALSE.equals(ibExpanderAttachments.getTag()));
+
                             lastAttachments = attachments.size();
 
                             boolean hide_attachments = Boolean.TRUE.equals(ibExpanderAttachments.getTag());
@@ -6822,7 +6832,7 @@ public class FragmentCompose extends FragmentBase {
                             });
 
                             ibRemoveAttachments.setVisibility(attachments.size() > 2 && !hide_attachments ? View.VISIBLE : View.GONE);
-                            ibExpanderAttachments.setVisibility(attachments.size() > 1 ? View.VISIBLE : View.GONE);
+                            ibExpanderAttachments.setVisibility(attachments.size() > 1 || inline || hide_attachments ? View.VISIBLE : View.GONE);
                             ibExpanderAttachments.setImageLevel(hide_attachments ? 1 /* more */ : 0 /* less */);
                             tvAttachments.setText(getResources()
                                     .getQuantityString(R.plurals.title_attachments, attachments.size(), attachments.size()));
