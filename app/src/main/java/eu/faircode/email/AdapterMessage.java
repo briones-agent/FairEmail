@@ -3764,7 +3764,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.ViewHold
             properties.setAttachments(message.id, attachments);
 
             boolean hide_attachments = properties.getValue("hide_attachments", message.id, hide_attachments_default);
-            boolean show_inline = properties.getValue("inline", message.id);
+            boolean show_inline = properties.getValue("inline", message.id, prefs.getBoolean("view_show_inline", false));
             boolean svg = prefs.getBoolean("svg", true);
             boolean webp = prefs.getBoolean("webp", true);
 
@@ -4969,6 +4969,10 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.ViewHold
 
             int id = compoundButton.getId();
             if (id == R.id.cbInline) {
+                if (isChecked)
+                    prefs.edit().putBoolean("view_show_inline", true).apply();
+                else
+                    prefs.edit().remove("view_show_inline").apply();
                 onShowInlineAttachments(message, isChecked);
             }
         }
