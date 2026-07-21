@@ -657,7 +657,7 @@ public class ConnectionHelper {
             return (addr.isLoopbackAddress() ||
                     addr.isSiteLocalAddress() ||
                     addr.isLinkLocalAddress() ||
-                    isCarrierGradeNat(addr) ||
+                    //isCarrierGradeNat(addr) ||
                     isUniqueLocalAddress(addr));
         } catch (Throwable ex) {
             Log.e(ex);
