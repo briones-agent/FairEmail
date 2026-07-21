@@ -6798,7 +6798,7 @@ public class FragmentCompose extends FragmentBase {
 
                             lastAttachments = attachments.size();
 
-                            boolean hide_attachments = Boolean.TRUE.equals(ibExpanderAttachments.getTag());
+                            boolean hide_attachments = (attachments.size() > 0 && Boolean.TRUE.equals(ibExpanderAttachments.getTag()));
 
                             List<EntityAttachment> a = (hide_attachments ? new ArrayList<>() : new ArrayList<>(attachments));
                             rvAttachment.post(new Runnable() {
@@ -6836,7 +6836,7 @@ public class FragmentCompose extends FragmentBase {
                             ibExpanderAttachments.setImageLevel(hide_attachments ? 1 /* more */ : 0 /* less */);
                             tvAttachments.setText(getResources()
                                     .getQuantityString(R.plurals.title_attachments, attachments.size(), attachments.size()));
-                            tvAttachments.setVisibility(attachments.size() > 0 && hide_attachments ? View.VISIBLE : View.GONE);
+                            tvAttachments.setVisibility(hide_attachments ? View.VISIBLE : View.GONE);
                             grpAttachments.setVisibility(attachments.size() > 0 ? View.VISIBLE : View.GONE);
 
                             boolean downloading = false;
