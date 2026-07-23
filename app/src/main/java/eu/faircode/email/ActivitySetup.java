@@ -176,6 +176,14 @@ public class ActivitySetup extends ActivityBase implements FragmentManager.OnBac
             }
         }).setColor(colorWarning).setSeparated());
 
+        menus.add(new NavMenuItem(R.drawable.twotone_dns_24, R.string.menu_expo, new Runnable() {
+            @Override
+            public void run() {
+                // Expo brownfield demo: opens the React Native screen from the fused AAR.
+                startActivity(new Intent(ActivitySetup.this, eu.faircode.email.ExpoActivity.class));
+            }
+        }));
+
         menus.add(new NavMenuItem(R.drawable.twotone_reorder_24, R.string.title_setup_reorder_accounts, new Runnable() {
             @Override
             public void run() {

@@ -157,6 +157,12 @@
             android:name="com.google.android.backup.api_key"
             android:value="unused" />
 
+        <!-- Expo brownfield demo: hosts the React Native screen -->
+        <activity
+            android:name="eu.faircode.email.ExpoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:exported="false" />
         <activity
             android:name=".ActivityMain"
             android:description="@string/app_name"

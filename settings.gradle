@@ -16,6 +16,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = "https://jitpack.io" }
+        // Expo brownfield demo: fused Expo/React Native AAR, see https://github.com/briones-agent/packages
+        maven {
+            url = "https://raw.githubusercontent.com/briones-agent/packages/main/maven"
+            content { includeGroup "dev.expo.brownfield" }
+        }
     }
 }
 

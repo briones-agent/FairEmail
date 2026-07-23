@@ -930,6 +930,16 @@ public class ActivityView extends ActivityBilling implements FragmentManager.OnB
             }
         }));
 
+        menus.add(new NavMenuItem(R.drawable.twotone_dns_24, R.string.menu_expo, new RunnableEx("view:expo") {
+            @Override
+            public void delegate() {
+                // Expo brownfield demo: opens the React Native screen from the fused AAR.
+                if (!drawerLayout.isLocked(drawerContainer))
+                    drawerLayout.closeDrawer(drawerContainer);
+                startActivity(new Intent(ActivityView.this, eu.faircode.email.ExpoActivity.class));
+            }
+        }));
+
         menus.add(new NavMenuItem(R.drawable.twotone_text_snippet_24, R.string.menu_answers, new RunnableEx("view:templates") {
             @Override
             public void delegate() {
