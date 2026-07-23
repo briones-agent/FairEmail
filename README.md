@@ -1,3 +1,20 @@
+# FairEmail + React Native
+
+This is an experimental fork of the official [FairEmail](https://github.com/M66B/FairEmail) project for testing Expo and React Native brownfield support in a large native-first Android app. It uses Expo's isolated approach, so the host consumes a prebuilt **fused AAR** containing the native runtime, Expo modules, and release JavaScript bundle without adding Node or a React Native toolchain.
+
+## Integration steps
+
+The fused AAR is built from the Expo app in [briones-agent/packages](https://github.com/briones-agent/packages) and published from that repository as a static Maven repository.
+
+1. Add `https://raw.githubusercontent.com/briones-agent/packages/main/maven` to `dependencyResolutionManagement.repositories`.
+2. Add `dev.expo.brownfield:expobrownfield-fused-release:1.0.1` to the app dependencies.
+3. Subclass `dev.expo.brownfield.BrownfieldActivity`, register it in the manifest, and launch it from the **Expo** navigation item.
+
+See the [Expo brownfield documentation](https://docs.expo.dev/brownfield/overview/) for the complete isolated integration workflow.
+
+<details>
+<summary>FairEmail</summary>
+
 <img src="https://github.com/M66B/FairEmail/raw/master/images/banner7_long.png" />
 
 <p align="center">
@@ -229,3 +246,5 @@ Copyright &copy; 2018-2026 Marcel Bokhorst. All rights reserved.
 > FairEmail is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 > FairEmail is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+</details>
