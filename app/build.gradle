@@ -26,7 +26,8 @@ android {
     defaultConfig {
         applicationId "eu.faircode.email"
         compileSdk = 37
-        minSdkVersion 23
+        // The fused Expo brownfield AAR requires API 24.
+        minSdkVersion 24
         targetSdkVersion 37
         //targetSdkPreview "VanillaIceCream"
         versionCode getVersionCode()
@@ -513,6 +514,7 @@ configurations.configureEach {
 
 dependencies {
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "dev.expo.brownfield:expobrownfield-fused-release:1.0.1"
 
     def desugar_version = "2.0.4"
     def startup_version = "1.2.0"

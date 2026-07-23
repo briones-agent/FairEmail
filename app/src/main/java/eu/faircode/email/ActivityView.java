@@ -970,6 +970,15 @@ public class ActivityView extends ActivityBilling implements FragmentManager.OnB
             }
         }));
 
+        menus.add(new NavMenuItem(R.drawable.twotone_extension_24, R.string.menu_expo, new RunnableEx("view:expo") {
+            @Override
+            public void delegate() {
+                if (!drawerLayout.isLocked(drawerContainer))
+                    drawerLayout.closeDrawer(drawerContainer);
+                startActivity(new Intent(ActivityView.this, ExpoActivity.class));
+            }
+        }));
+
         adapterNavMenu.set(menus, nav_expanded);
 
         // Collapsible menus

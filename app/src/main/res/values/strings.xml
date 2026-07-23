@@ -173,6 +173,7 @@
     <string name="menu_operations">Operations</string>
     <string name="menu_contacts">Local contacts</string>
     <string name="menu_setup">Settings</string>
+    <string name="menu_expo" translatable="false">Expo</string>
 
     <string name="menu_legend">Legend</string>
     <string name="menu_test">Test program</string>
